@@ -1,0 +1,12 @@
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/bin/Debug/netcoreapp3.1/ToyBlockFactory.deps.json
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/bin/Debug/netcoreapp3.1/ToyBlockFactory.runtimeconfig.json
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/bin/Debug/netcoreapp3.1/ToyBlockFactory.runtimeconfig.dev.json
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/bin/Debug/netcoreapp3.1/ToyBlockFactory.dll
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/bin/Debug/netcoreapp3.1/ToyBlockFactory.pdb
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.csprojAssemblyReference.cache
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.AssemblyInfoInputs.cache
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.AssemblyInfo.cs
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.csproj.CoreCompileInputs.cache
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.dll
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.pdb
+/Users/Michael.Wang/Desktop/MYOB/MYOB Katas/Language Design/ToyBlockFactoryKata/ToyBlockFactory/obj/Debug/netcoreapp3.1/ToyBlockFactory.genruntimeconfig.cache
