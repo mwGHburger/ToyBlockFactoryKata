@@ -8,9 +8,9 @@ namespace ToyBlockFactory
         public string Address { get; }
         public string DueDate { get; }
         public string OrderNumber { get; }
-        public List<BlockOrderItem> Blocks { get; }
+        public List<IBlockOrderItem> Blocks { get; }
 
-        public Order(string customerName = "", string address = "", string dueDate = "", string orderNumber = "", List<BlockOrderItem> blocks = null)
+        public Order(string customerName = "", string address = "", string dueDate = "", string orderNumber = "", List<IBlockOrderItem> blocks = null)
         {
             CustomerName = customerName;
             Address = address;

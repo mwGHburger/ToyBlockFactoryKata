@@ -2,19 +2,19 @@ namespace ToyBlockFactory
 {
     public class OrderTaker
     {
-        private IBuyerInformationCollector _buyerInformationCollector;
+        private ICustomerInformationCollector _customerInformationCollector;
         private IOrderListGenerator _orderListGenerator;
         private IOrderNumberTracker _orderNumberTracker;
 
-        public OrderTaker(IBuyerInformationCollector buyerInformationCollector, IOrderListGenerator orderListGenerator, IOrderNumberTracker orderNumberTracker)
+        public OrderTaker(ICustomerInformationCollector customerInformationCollector, IOrderListGenerator orderListGenerator, IOrderNumberTracker orderNumberTracker)
         {
-            _buyerInformationCollector = buyerInformationCollector;
+            _customerInformationCollector = customerInformationCollector;
             _orderListGenerator = orderListGenerator;
             _orderNumberTracker = orderNumberTracker;
         }
         public Order TakeSingleOrder()
         {
-            var customerInformation = _buyerInformationCollector.GetBuyerInformation();
+            var customerInformation = _customerInformationCollector.GetCustomerInformation();
             var blocksList = _orderListGenerator.GetBlockOrderItemsDetails();
             var newOrderNumber = _orderNumberTracker.GetNewOrderNumber();
             return new Order(

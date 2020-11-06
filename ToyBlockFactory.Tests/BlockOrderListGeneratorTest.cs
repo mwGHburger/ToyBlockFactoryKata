@@ -27,7 +27,7 @@ namespace ToyBlockFactory.Tests
             
             var actualBlockOrderItemsList = blockListGenerator.GetBlockOrderItemsDetails();
 
-            Assert.IsType<List<BlockOrderItem>>(actualBlockOrderItemsList);
+            Assert.IsType<List<IBlockOrderItem>>(actualBlockOrderItemsList);
         }
 
         [Theory]

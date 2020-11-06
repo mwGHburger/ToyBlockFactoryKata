@@ -6,16 +6,16 @@ namespace ToyBlockFactory.Tests
 {
     public class OrderTakerTest
     {
-        Mock<IBuyerInformationCollector> mockBuyerInformationCollector = new Mock<IBuyerInformationCollector>();
+        Mock<ICustomerInformationCollector> mockCustomerInformationCollector = new Mock<ICustomerInformationCollector>();
         Mock<IOrderListGenerator> mockBlockOrderListGenerator = new Mock<IOrderListGenerator>();
         Mock<IOrderNumberTracker> mockOrderNumberTracker = new Mock<IOrderNumberTracker>();
 
         [Fact]
         public void TakeSingleOrderShouldReturnAnIOrderTypeObject()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
             
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData());
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData());
 
             var actual = orderTaker.TakeSingleOrder();
 
@@ -25,21 +25,21 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void TakeSingleOrderShouldCollectBuyerInformation()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData());
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData());
 
             orderTaker.TakeSingleOrder();
 
-            mockBuyerInformationCollector.Verify(x => x.GetBuyerInformation(), Times.Exactly(1));
+            mockCustomerInformationCollector.Verify(x => x.GetCustomerInformation(), Times.Exactly(1));
         }
 
         [Fact]
         public void TakeSingleOrderShouldCollectBlockOrderQuantities()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData());
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData());
 
             orderTaker.TakeSingleOrder();
 
@@ -49,9 +49,9 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void TakeSingleOrderShouldReturnAnOrderObjectWithCustomerName()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData(name: "Mark Pearl"));
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData(name: "Mark Pearl"));
 
             var actualOrder = orderTaker.TakeSingleOrder();
 
@@ -61,9 +61,9 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void TakeSingleOrderShouldReturnAnOrderObjectWithAddress()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData(address: "1 Bob Avenue, Auckland"));
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData(address: "1 Bob Avenue, Auckland"));
 
             var actualOrder = orderTaker.TakeSingleOrder();
 
@@ -73,9 +73,9 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void TakeSingleOrderShouldReturnAnOrderObjectWithDueDate()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData(dueDate: "19 Jan 2019"));
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData(dueDate: "19 Jan 2019"));
 
             var actualOrder = orderTaker.TakeSingleOrder();
 
@@ -85,9 +85,9 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void TakeSingleOrderShouldReturnAnOrderObjectWithOrderNumber()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData());
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData());
             mockOrderNumberTracker.Setup(x => x.GetNewOrderNumber()).Returns("0001");
 
             var actualOrder = orderTaker.TakeSingleOrder();
@@ -100,14 +100,14 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void TakeSingleOrderShouldReturnAnOrderObjectWithListOfBlockItems()
         {
-            var orderTaker = new OrderTaker(mockBuyerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
+            var orderTaker = new OrderTaker(mockCustomerInformationCollector.Object, mockBlockOrderListGenerator.Object, mockOrderNumberTracker.Object);
 
-            mockBuyerInformationCollector.Setup(x => x.GetBuyerInformation()).Returns(new BuyerInformationData());
-            mockBlockOrderListGenerator.Setup(x => x.GetBlockOrderItemsDetails()).Returns(new List<BlockOrderItem>());
+            mockCustomerInformationCollector.Setup(x => x.GetCustomerInformation()).Returns(new CustomerInformationData());
+            mockBlockOrderListGenerator.Setup(x => x.GetBlockOrderItemsDetails()).Returns(new List<IBlockOrderItem>());
 
             var actualOrder = orderTaker.TakeSingleOrder();
 
-            Assert.IsType<List<BlockOrderItem>>(actualOrder.Blocks);
+            Assert.IsType<List<IBlockOrderItem>>(actualOrder.Blocks);
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 namespace ToyBlockFactory
 {
-    public class BlockOrderItem
+    public class BlockOrderItem : IBlockOrderItem
     {
         public string Shape { get; }
         public string Colour { get; }

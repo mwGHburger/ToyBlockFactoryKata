@@ -13,10 +13,9 @@ namespace ToyBlockFactory
             _shapes = shapes;
             _colours = colours;
         }
-        public List<BlockOrderItem> GetBlockOrderItemsDetails()
+        public List<IBlockOrderItem> GetBlockOrderItemsDetails()
         {
-            var blockOrderItems =  new List<BlockOrderItem>();
-            // TODO: BlockOrderItem needs should be interface
+            var blockOrderItems =  new List<IBlockOrderItem>();
             foreach(IShape shape in _shapes)
             {
                 foreach(IColour colour in _colours)

@@ -4,6 +4,6 @@ namespace ToyBlockFactory
 {
     public interface IOrderListGenerator
     {
-         List<BlockOrderItem> GetBlockOrderItemsDetails();
+         List<IBlockOrderItem> GetBlockOrderItemsDetails();
     }
 }

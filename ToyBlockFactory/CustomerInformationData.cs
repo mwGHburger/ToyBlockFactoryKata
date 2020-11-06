@@ -1,12 +1,12 @@
 namespace ToyBlockFactory
 {
-    public class BuyerInformationData
+    public class CustomerInformationData
     {
         public string Name { get; }
         public string Address { get; }
         public string DueDate { get; }
 
-        public BuyerInformationData(string name = "", string address = "", string dueDate = "")
+        public CustomerInformationData(string name = "", string address = "", string dueDate = "")
         {
             Name = name;
             Address = address;

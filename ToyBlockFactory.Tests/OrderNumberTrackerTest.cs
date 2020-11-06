@@ -5,7 +5,7 @@ namespace ToyBlockFactory.Tests
     public class OrderNumberTrackerTest
     {
         [Fact]
-        public void GetNewOrderNumberShouldReturnNumberOrderNumberAsString()
+        public void GetNewOrderNumber_ShouldReturnNumberOrderNumberAsString()
         {
             var orderNumberTracker = new OrderNumberTracker();
 
