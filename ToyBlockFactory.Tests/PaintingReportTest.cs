@@ -12,7 +12,7 @@ namespace ToyBlockFactory.Tests
             var mockConsoleIO = new Mock<IConsoleIO>();
             var mockReportTable = new Mock<IReportTable>();
             var mockStandardReportMessages = new Mock<IStandardReportMessages>();
-            var paintingReport = new PaintingReport(mockConsoleIO.Object, mockReportTable.Object, mockStandardReportMessages.Object);
+            var paintingReport = new PaintingReport(mockConsoleIO.Object, mockStandardReportMessages.Object, mockReportTable.Object);
 
             mockStandardReportMessages.Setup(x => x.GenerateReportConfirmation("Painting Report")).Returns("Your painting report has been generated:\n\n");
             mockStandardReportMessages.Setup(x => x.DisplayCustomerDetails(It.IsAny<IOrder>())).Returns("Name: Mark Pearl Address: 1 Bob Avenue, Auckland Due Date: 19 Jan 2019 Order #: 0001:\n\n");

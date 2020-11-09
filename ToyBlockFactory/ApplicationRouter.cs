@@ -3,24 +3,23 @@ namespace ToyBlockFactory
     public class ApplicationRouter
     {
         private IApplicationController _applicationController;
+        private IStandardApplicationMessages _standardApplicationMessages;
         private IConsoleIO _consoleIO;
         private bool _isApplicationRunning = true;
 
-        public ApplicationRouter(IApplicationController applicationController, IConsoleIO consoleIO)
+        public ApplicationRouter(IApplicationController applicationController, IConsoleIO consoleIO, IStandardApplicationMessages standardApplicationMessages )
         {
             _applicationController = applicationController;
+            _standardApplicationMessages = standardApplicationMessages;
             _consoleIO = consoleIO;
         }
 
         public void Run()
         {
-            var prompt = 
-            "Choose a function\n" +
-            "1 - Make Single Order\n" +
-            "q - To Quit Application";
+            _consoleIO.Write(_standardApplicationMessages.Welcome());
             while(_isApplicationRunning)
             {
-                var input = _consoleIO.GetInput(prompt);
+                var input = _consoleIO.GetInput(_standardApplicationMessages.Router());
                 switch(input)
                 {
                     case "1":
@@ -28,9 +27,10 @@ namespace ToyBlockFactory
                         break;
                     case "q":
                         _isApplicationRunning = false;
-                        return;
+                        break;
                 }
             }
+            _consoleIO.Write(_standardApplicationMessages.EndApplication());
         }
     }
 }

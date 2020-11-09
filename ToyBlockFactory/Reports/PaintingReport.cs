@@ -8,7 +8,7 @@ namespace ToyBlockFactory
 
         public string ReportType { get; } = "Painting Report";
         
-        public PaintingReport(IConsoleIO consoleIO, IReportTable reportTable, IStandardReportMessages standardReportMessages)
+        public PaintingReport(IConsoleIO consoleIO, IStandardReportMessages standardReportMessages, IReportTable reportTable)
         {
             _consoleIO = consoleIO;
             _reportTable = reportTable;

@@ -6,7 +6,7 @@ namespace ToyBlockFactory
     {
         public static ApplicationRouter CreateApplication()
         {
-            return new ApplicationRouter(CreateApplicationController(), CreateConsoleIO());
+            return new ApplicationRouter(CreateApplicationController(), CreateConsoleIO(), CreateStandardApplicationMessages());
         }
 
         public static IApplicationController CreateApplicationController()
@@ -14,10 +14,14 @@ namespace ToyBlockFactory
             return new ApplicationController(CreateOrderTaker(), CreateReportGenerator());
         }
 
-        // TODO: Why not IConsoleIO
         public static IConsoleIO CreateConsoleIO()
         {
             return new ConsoleIO();
+        }
+
+        public static IStandardApplicationMessages CreateStandardApplicationMessages()
+        {
+            return new StandardApplicationMessages();
         }
 
         public static IOrderTaker CreateOrderTaker()
@@ -67,10 +71,20 @@ namespace ToyBlockFactory
         {
             return new List<IReport>()
             {
-                new InvoiceReport(CreateConsoleIO(), CreateColours(), CreateShapes(), CreateStandardReportMessages(), CreateInvoiceReportTable()),
-                // TODO: Fix parameter order
-                new CuttingListReport(CreateConsoleIO(), CreateStandardReportMessages(), CreateCuttingListReportTable()),
-                new PaintingReport(CreateConsoleIO(), CreateInvoiceReportTable(), CreateStandardReportMessages())
+                new InvoiceReport(
+                    CreateConsoleIO(), 
+                    CreateColours(), 
+                    CreateShapes(), 
+                    CreateStandardReportMessages(), 
+                    CreateInvoiceReportTable()),
+                new CuttingListReport(
+                    CreateConsoleIO(), 
+                    CreateStandardReportMessages(), 
+                    CreateCuttingListReportTable()),
+                new PaintingReport(
+                    CreateConsoleIO(), 
+                    CreateStandardReportMessages(), 
+                    CreateInvoiceReportTable())
             };
         }
 
@@ -81,33 +95,45 @@ namespace ToyBlockFactory
 
         public static IReportTable CreateInvoiceReportTable()
         {
-            return new ReportTable(CreateColumns(), CreateRows(), CreateInvoiceFieldData());
+            return new ReportTable(
+                CreateInvoiceReportColumns(), 
+                CreateRows(), 
+                CreateInvoiceFieldData());
         }
 
         public static IReportTable CreateCuttingListReportTable()
         {
-            return new ReportTable(CreateColumns(), CreateRows(), CreateCuttingListFieldData());
+            var columns = new List<string>()
+            {
+                "Qty"
+            };
+            return new ReportTable(
+                columns, 
+                CreateRows(), 
+                CreateCuttingListFieldData());
         }
 
         // TODO: Fix this implementation
-        public static List<string> CreateColumns()
+        public static List<string> CreateInvoiceReportColumns()
         {
-            return new List<string>()
+            var columns = CreateColours();
+            var newColumns = new List<string>();
+            foreach(IColour colour in columns)
             {
-                "Red",
-                "Blue",
-                "Yellow"
-            };
+                newColumns.Add(colour.Name);
+            }
+            return newColumns;
         }
 
         public static List<string> CreateRows()
         {
-            return new List<string>()
+            var columns = CreateShapes();
+            var newColumns = new List<string>();
+            foreach(IShape colour in columns)
             {
-                "Square",
-                "Triangle",
-                "Circle"
-            };
+                newColumns.Add(colour.Name);
+            }
+            return newColumns;
         }
 
         public static IFieldData CreateInvoiceFieldData()
