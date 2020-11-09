@@ -9,11 +9,11 @@ namespace ToyBlockFactory
         private List<string> _rows;
         private int _longestRowLength;
 
-        public ReportTable(List<string> columns, List<string> rows, int longestRowLength, IFieldData fieldData)
+        public ReportTable(List<string> columns, List<string> rows, IFieldData fieldData)
         {
             _columns = columns;
             _rows = rows;
-            _longestRowLength = longestRowLength;
+            _longestRowLength = FindLongestRowLength();
             _fieldData = fieldData;
         }
 
@@ -57,6 +57,19 @@ namespace ToyBlockFactory
                 body = AddLineBreak(body);
             }
             return body;
+        }
+
+        private int FindLongestRowLength()
+        {
+            int maxRowLength = 0;
+            foreach(string row in _rows)
+            {
+                if(row.Length > maxRowLength)
+                {
+                    maxRowLength = row.Length;
+                }
+            }
+            return maxRowLength;
         }
 
         private string AddLineBreak(string text)

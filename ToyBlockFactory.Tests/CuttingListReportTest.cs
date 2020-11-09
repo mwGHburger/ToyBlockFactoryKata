@@ -9,17 +9,24 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void GenerateReport_ShouldGenerateCuttingListReport()
         {
-            var colours = SetupColours();
-            var shapes = SetupShapes();
             var blocks = SetupBlocks();  
             var mockOrder = new Mock<IOrder>();
             var mockConsoleIO = new Mock<IConsoleIO>();
             var mockStandardReportMessages = new Mock<IStandardReportMessages>();
-            var cuttingListReport = new CuttingListReport(mockConsoleIO.Object, shapes, colours, mockStandardReportMessages.Object);
+            var mockReportTable = new Mock<IReportTable>();
+
+            var cuttingListReport = new CuttingListReport(mockConsoleIO.Object, mockStandardReportMessages.Object, mockReportTable.Object);
 
             mockStandardReportMessages.Setup(x => x.GenerateReportConfirmation("Cutting List")).Returns("Your Cutting List has been generated:\n\n");
             mockStandardReportMessages.Setup(x => x.DisplayCustomerDetails(It.IsAny<IOrder>())).Returns("Name: Mark Pearl Address: 1 Bob Avenue, Auckland Due Date: 19 Jan 2019 Order #: 0001\n\n");
             mockOrder.Setup(x => x.Blocks).Returns(blocks);
+            mockReportTable.Setup(x => x.CreateTable(It.IsAny<IOrder>())).Returns(
+                "|          | Qty |\n" +
+                "|----------|-----|\n" +
+                "| Square   | 2   |\n" +
+                "| Triangle | 2   |\n" +
+                "| Circle   | 3   |\n"
+            );
 
             cuttingListReport.GenerateReport(mockOrder.Object);
 
@@ -31,26 +38,7 @@ namespace ToyBlockFactory.Tests
             "| Square   | 2   |\n" +
             "| Triangle | 2   |\n" +
             "| Circle   | 3   |\n"
-            ));
-        }
-        private List<IColour> SetupColours()
-        {
-            return new List<IColour>()
-            {
-                new Red(),
-                new Blue(),
-                new Yellow()
-            };
-        }
-
-        private List<IShape> SetupShapes()
-        {
-            return new List<IShape>()
-            {
-                new Square(),
-                new Triangle(),
-                new Circle()
-            };
+            ), Times.Exactly(1));
         }
 
         private List<IBlockOrderItem> SetupBlocks()

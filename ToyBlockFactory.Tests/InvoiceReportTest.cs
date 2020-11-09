@@ -50,7 +50,7 @@ namespace ToyBlockFactory.Tests
             "Triangle       2 @ $2 ppi = $4\n" +
             "Circle         3 @ $3 ppi = $9\n" +
             "Red color surcharge    1 @ $1 ppi = $1\n"
-            ));
+            ), Times.Exactly(1));
         }
 
         private List<IColour> SetupColours()

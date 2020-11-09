@@ -11,10 +11,9 @@ namespace ToyBlockFactory.Tests
         {
             var columns = SetupColumns();
             var rows = SetupRows();
-            var longestRowLength = 8;
             var mockOrder = new Mock<IOrder>();
             var mockFieldData = new Mock<IFieldData>();
-            var reportTable = new ReportTable(columns, rows, longestRowLength,mockFieldData.Object);
+            var reportTable = new ReportTable(columns, rows, mockFieldData.Object);
             var expected = 
             "|          | Red | Blue | Yellow |\n" +
             "|----------|-----|------|--------|\n" +
