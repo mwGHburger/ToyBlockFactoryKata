@@ -1,6 +1,6 @@
 namespace ToyBlockFactory
 {
-    public class StandardReportMessages
+    public class StandardReportMessages : IStandardReportMessages
     {
         public string GenerateReportConfirmation(string reportType)
         {

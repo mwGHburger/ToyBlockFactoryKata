@@ -1,6 +1,6 @@
 namespace ToyBlockFactory
 {
-    public class ApplicationController
+    public class ApplicationController : IApplicationController
     {
         private IOrderTaker _orderTaker;
         private IReportGenerator _reportGenerator;

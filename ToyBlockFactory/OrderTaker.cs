@@ -1,6 +1,6 @@
 namespace ToyBlockFactory
 {
-    public class OrderTaker
+    public class OrderTaker : IOrderTaker
     {
         private ICustomerInformationCollector _customerInformationCollector;
         private IOrderListGenerator _orderListGenerator;
