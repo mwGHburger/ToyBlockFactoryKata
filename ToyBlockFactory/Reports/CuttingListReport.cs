@@ -58,21 +58,21 @@ namespace ToyBlockFactory
                 body += $"| {row.PadRight(_longestRowLength)} |";
                 foreach(string column in columns)
                 {
-                    var tableFieldQuantity = FormatTableFieldData(row, column, order);
-                    body += $" {tableFieldQuantity.PadRight(column.Length)} |";
+                    var tableFieldData = DetermineTableFieldData(order: order, row: row);
+                    body += $" {tableFieldData.PadRight(column.Length)} |";
                 }
                 body = AddLineBreak(body);
             }
             return body;
         }
-        private string FormatTableFieldData(string row, string column, IOrder order)
+        private string DetermineTableFieldData(IOrder order, string row = "", string column = "")
         {
-            var shapeQuantity = 0;
-            var blocks = order.Blocks.FindAll(block => 
-                block.Shape.Equals(row)
-            );
-            blocks.ForEach(block => shapeQuantity += block.OrderQuantity);
-            var stringifiedQuantity = shapeQuantity == 0 ? "-" : $"{shapeQuantity}";
+            var fieldData = 0;
+            var blocks = order.Blocks.FindAll(block => block.Shape.Equals(row));
+            blocks.ForEach(block => fieldData += block.OrderQuantity);
+            
+            //TODO: Logic below can be moved out
+            var stringifiedQuantity = fieldData.Equals(0) ? "-" : $"{fieldData}";
             return stringifiedQuantity;
         }
 

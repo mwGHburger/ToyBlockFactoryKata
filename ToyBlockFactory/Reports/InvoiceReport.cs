@@ -64,8 +64,8 @@ namespace ToyBlockFactory
                 body += $"| {row.PadRight(_longestRowLength)} |";
                 foreach(string column in columns)
                 {
-                    var tableFieldQuantity = FormatTableFieldData(row, column, order);
-                    body += $" {tableFieldQuantity.PadRight(column.Length)} |";
+                    var tableFieldData = DetermineTableFieldData(order, row, column);
+                    body += $" {tableFieldData.PadRight(column.Length)} |";
                 }
                 body = AddLineBreak(body);
             }
@@ -104,13 +104,14 @@ namespace ToyBlockFactory
             return AddLineBreak($"{colourName} color surcharge    {quantity} @ ${colour.Surcharge} ppi = ${totalCharge}");
         }
 
-        private string FormatTableFieldData(string row, string column, IOrder order)
+        private string DetermineTableFieldData(IOrder order, string row, string column)
         {
-            var orderQuantity = order.Blocks.Find(x => 
-                x.Colour.Equals(column) && 
-                x.Shape.Equals(row)
+            var fieldData = order.Blocks.Find(block => 
+                block.Colour.Equals(column) && 
+                block.Shape.Equals(row)
             ).OrderQuantity;
-            var stringifiedQuantity = orderQuantity == 0 ? "-" : $"{orderQuantity}";
+            
+            var stringifiedQuantity = fieldData.Equals(0) ? "-" : $"{fieldData}";
             return stringifiedQuantity;
         }
 
