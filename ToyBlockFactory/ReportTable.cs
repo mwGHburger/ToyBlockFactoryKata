@@ -13,8 +13,8 @@ namespace ToyBlockFactory
         {
             _columns = columns;
             _rows = rows;
-            _longestRowLength = FindLongestRowLength();
             _fieldData = fieldData;
+            _longestRowLength = FindLongestRowLength();
         }
 
         public string CreateTable(IOrder order)
