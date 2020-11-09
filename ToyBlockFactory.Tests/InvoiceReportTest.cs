@@ -17,7 +17,9 @@ namespace ToyBlockFactory.Tests
             var mockConsoleIO = new Mock<IConsoleIO>();
             var mockOrder = new Mock<IOrder>();
             var mockStandardReportMessages = new Mock<IStandardReportMessages>();
-            var invoiceReport = new InvoiceReport(mockConsoleIO.Object, colours, shapes,mockStandardReportMessages.Object);
+            var mockReportTable = new Mock<IReportTable>();
+
+            var invoiceReport = new InvoiceReport(mockConsoleIO.Object, colours, shapes,mockStandardReportMessages.Object, mockReportTable.Object);
 
             mockOrder.Setup(x => x.CustomerName).Returns("Mark Pearl");
             mockOrder.Setup(x => x.Address).Returns("1 Bob Avenue, Auckland");
@@ -26,6 +28,13 @@ namespace ToyBlockFactory.Tests
             mockOrder.Setup(x => x.Blocks).Returns(blocks);
             mockStandardReportMessages.Setup(x => x.GenerateReportConfirmation("Invoice Report")).Returns("Your Invoice Report has been generated:\n\n");
             mockStandardReportMessages.Setup(x => x.DisplayCustomerDetails(It.IsAny<IOrder>())).Returns("Name: Mark Pearl Address: 1 Bob Avenue, Auckland Due Date: 19 Jan 2019 Order #: 0001\n\n");
+            mockReportTable.Setup(x => x.CreateTable(It.IsAny<IOrder>())).Returns(
+                "|          | Red | Blue | Yellow |\n" +
+                "|----------|-----|------|--------|\n" +
+                "| Square   | 1   | -    | 1      |\n" +
+                "| Triangle | -   | 2    | -      |\n" +
+                "| Circle   | -   | 1    | 2      |\n"
+            );
 
             invoiceReport.GenerateReport(mockOrder.Object);
 

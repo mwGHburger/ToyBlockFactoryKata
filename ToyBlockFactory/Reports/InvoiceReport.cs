@@ -10,29 +10,26 @@ namespace ToyBlockFactory
         private List<IShape> _shapes;
         private IStandardReportMessages _standardReportMessages;
         private int _longestRowLength;
+        private IReportTable _reportTable;
 
-        public InvoiceReport(IConsoleIO consoleIO, List<IColour> colours, List<IShape> shapes, IStandardReportMessages standardReportMessages)
+        public InvoiceReport(IConsoleIO consoleIO, List<IColour> colours, List<IShape> shapes, IStandardReportMessages standardReportMessages, IReportTable reportTable)
         {
             _consoleIO = consoleIO;
             _colours = colours;
             _shapes = shapes;
             _standardReportMessages = standardReportMessages;
             _longestRowLength = FindLongestRowLength();
+            _reportTable = reportTable;
         }
         public void GenerateReport(IOrder order)
         {
             var rows = CreateTableRows();
             var columns = CreateTableColumns();
-            var tableHeader = CreateTableHeader(columns);
-            var breaker = CreateTableBreaker(columns);
-            var tableBody = CreateTableBody(order, rows, columns);
             var costInformation = CreateCostInformation(order);
             _consoleIO.Write(
                 _standardReportMessages.GenerateReportConfirmation(ReportType) +
                 _standardReportMessages.DisplayCustomerDetails(order) +
-                tableHeader +
-                breaker +
-                tableBody +
+                _reportTable.CreateTable(order) +
                 costInformation
             );
         }

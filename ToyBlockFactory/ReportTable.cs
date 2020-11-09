@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ToyBlockFactory
 {
-    public class ReportTable
+    public class ReportTable : IReportTable
     {
         private IFieldData _fieldData;
         private List<string> _columns;
@@ -51,7 +51,7 @@ namespace ToyBlockFactory
                 body += $"| {row.PadRight(_longestRowLength)} |";
                 foreach(string column in _columns)
                 {
-                    var tableFieldQuantity = _fieldData.DetermineTableFieldData(row, column, order);
+                    var tableFieldQuantity = _fieldData.DetermineTableFieldData(order, row, column);
                     body += $" {tableFieldQuantity.PadRight(column.Length)} |";
                 }
                 body = AddLineBreak(body);
