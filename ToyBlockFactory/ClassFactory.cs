@@ -6,27 +6,18 @@ namespace ToyBlockFactory
     {
         private static List<IShape> _shapes = CreateShapes();
         private static List<IColour> _colours = CreateColours();
-        private static IConsoleIO _consoleIO = CreateConsoleIO();
-        private static IStandardReportMessages _standardReportMessages = CreateStandardReportMessages();
+        private static IConsoleIO _consoleIO = new ConsoleIO();
+        private static IStandardReportMessages _standardReportMessages = new StandardReportMessages();
+        private static IStandardApplicationMessages _standardApplicationMessages = new StandardApplicationMessages();
 
         public static IApplicationRouter CreateApplication()
         {
-            return new ApplicationRouter(CreateApplicationController(), _consoleIO, CreateStandardApplicationMessages());
+            return new ApplicationRouter(CreateApplicationController(), _consoleIO, _standardApplicationMessages);
         }
 
         private static IApplicationController CreateApplicationController()
         {
             return new ApplicationController(CreateOrderTaker(), CreateReportGenerator());
-        }
-
-        private static IConsoleIO CreateConsoleIO()
-        {
-            return new ConsoleIO();
-        }
-
-        private static IStandardApplicationMessages CreateStandardApplicationMessages()
-        {
-            return new StandardApplicationMessages();
         }
 
         private static IOrderTaker CreateOrderTaker()
@@ -91,11 +82,6 @@ namespace ToyBlockFactory
                     _standardReportMessages, 
                     CreateInvoiceReportTable())
             };
-        }
-
-        private static IStandardReportMessages CreateStandardReportMessages()
-        {
-            return new StandardReportMessages();
         }
 
         private static IReportTable CreateInvoiceReportTable()

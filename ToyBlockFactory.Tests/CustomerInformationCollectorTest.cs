@@ -17,14 +17,13 @@ namespace ToyBlockFactory.Tests
             Assert.IsType<CustomerInformationData>(actual);
         }
 
-        [Fact]
-        public void GetCustomerInformation_ShouldReturnBuyerInformationObject_HoldingInputData()
+        [Theory]
+        [InlineData("Mar Pearl","1 Bob Avenue, Aucklan","19 Jan 2019")]
+        [InlineData("Mar Pearfl","1 Boab Avenue, Aucklan","198 Jan 2019")]
+        public void GetCustomerInformation_ShouldReturnBuyerInformationObject_HoldingInputData(string name, string address, string dueDate)
         {
             var mockConsoleIO = new Mock<IConsoleIO>();
             var customerInformationCollector = new CustomerInformationCollector(mockConsoleIO.Object);
-            var name = "Mar Pearl";
-            var address = "1 Bob Avenue, Aucklan";
-            var dueDate = "19 Jan 2019";
 
             mockConsoleIO.Setup(x => x.GetInput("Please input your Name: ")).Returns(name);
             mockConsoleIO.Setup(x => x.GetInput("Please input your Address: ")).Returns(address);
