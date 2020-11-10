@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace ToyBlockFactory
@@ -20,11 +21,17 @@ namespace ToyBlockFactory
             {
                 foreach(IColour colour in _colours)
                 {
-                    var orderQuantity = _consoleIO.GetInput($"Please input the number of {colour.Name} {shape.Name}: ");
+                    var orderInput = _consoleIO.GetInput($"Please input the number of {colour.Name} {shape.Name}: ");
+                    var orderQuantity = FormatOrderInput(orderInput);
                     blockOrderItems.Add(new BlockOrderItem(shape.Name, colour.Name, orderQuantity));
                 }
             }
             return blockOrderItems;
+        }
+
+        private int FormatOrderInput(string input)
+        {
+            return String.IsNullOrEmpty(input) || input.Equals("0") ? 0 : Convert.ToInt32(input);
         }
     }
 }

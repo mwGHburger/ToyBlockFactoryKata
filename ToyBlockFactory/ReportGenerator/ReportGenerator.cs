@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace ToyBlockFactory
 {
-    public class ReportsGenerator : IReportGenerator
+    public class ReportGenerator : IReportGenerator
     {
         private List<IReport> _reports;
 
-        public ReportsGenerator(List<IReport> reports)
+        public ReportGenerator(List<IReport> reports)
         {
             _reports = reports;
         }

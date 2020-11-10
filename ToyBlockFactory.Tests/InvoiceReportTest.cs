@@ -11,7 +11,6 @@ namespace ToyBlockFactory.Tests
         {
             var colours = SetupColours();
             var shapes = SetupShapes();
-            // TODO: How to mock a list of blocks
             var blocks = SetupBlocks();            
             
             var mockConsoleIO = new Mock<IConsoleIO>();
@@ -77,15 +76,15 @@ namespace ToyBlockFactory.Tests
         {
             return new List<IBlockOrderItem>()
             {
-                new BlockOrderItem("Square", "Red", "1"),
-                new BlockOrderItem("Triangle", "Red", "0"),
-                new BlockOrderItem("Circle", "Red", "0"),
-                new BlockOrderItem("Square", "Blue", "0"),
-                new BlockOrderItem("Triangle", "Blue", "2"),
-                new BlockOrderItem("Circle", "Blue", "1"),
-                new BlockOrderItem("Square", "Yellow", "1"),
-                new BlockOrderItem("Triangle", "Yellow", "0"),
-                new BlockOrderItem("Circle", "Yellow", "2"),
+                new BlockOrderItem("Square", "Red", 1),
+                new BlockOrderItem("Triangle", "Red", 0),
+                new BlockOrderItem("Circle", "Red", 0),
+                new BlockOrderItem("Square", "Blue", 0),
+                new BlockOrderItem("Triangle", "Blue", 2),
+                new BlockOrderItem("Circle", "Blue", 1),
+                new BlockOrderItem("Square", "Yellow", 1),
+                new BlockOrderItem("Triangle", "Yellow", 0),
+                new BlockOrderItem("Circle", "Yellow", 2)
             };
         }
 

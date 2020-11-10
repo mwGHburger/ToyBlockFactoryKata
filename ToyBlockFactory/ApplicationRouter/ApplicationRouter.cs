@@ -1,6 +1,6 @@
 namespace ToyBlockFactory
 {
-    public class ApplicationRouter
+    public class ApplicationRouter : IApplicationRouter
     {
         private IApplicationController _applicationController;
         private IStandardApplicationMessages _standardApplicationMessages;

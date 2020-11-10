@@ -7,11 +7,11 @@ namespace ToyBlockFactory
         public string Colour { get; }
         public int OrderQuantity { get; }
 
-        public BlockOrderItem(string shape, string colour, string orderQuantity)
+        public BlockOrderItem(string shape, string colour, int orderQuantity)
         {
             Shape = shape;
             Colour = colour;
-            OrderQuantity = Convert.ToInt32(orderQuantity);
+            OrderQuantity = orderQuantity;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace ToyBlockFactory.Tests
                 mockPaintingReport.Object
             };
             var mockOrder = new Mock<IOrder>();
-            var reportsGenerator = new ReportsGenerator(reportTypes);
+            var reportsGenerator = new ReportGenerator(reportTypes);
 
             reportsGenerator.GenerateReportsForSingleOrder(mockOrder.Object);
 

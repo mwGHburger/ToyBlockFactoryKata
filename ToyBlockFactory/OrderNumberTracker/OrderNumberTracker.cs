@@ -6,9 +6,9 @@ namespace ToyBlockFactory
 
         public string GetNewOrderNumber()
         {
-            // TODO: make this more dynamic
             _currentOrderNumber += 1;
-            return $"000{_currentOrderNumber}";
+            char pad = '0';
+            return _currentOrderNumber.ToString().PadLeft(4, pad);
         }
     }
 }

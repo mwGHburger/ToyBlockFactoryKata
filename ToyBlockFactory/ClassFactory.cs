@@ -4,41 +4,46 @@ namespace ToyBlockFactory
 {
     public static class ClassFactory
     {
-        public static ApplicationRouter CreateApplication()
+        private static List<IShape> _shapes = CreateShapes();
+        private static List<IColour> _colours = CreateColours();
+        private static IConsoleIO _consoleIO = CreateConsoleIO();
+        private static IStandardReportMessages _standardReportMessages = CreateStandardReportMessages();
+
+        public static IApplicationRouter CreateApplication()
         {
-            return new ApplicationRouter(CreateApplicationController(), CreateConsoleIO(), CreateStandardApplicationMessages());
+            return new ApplicationRouter(CreateApplicationController(), _consoleIO, CreateStandardApplicationMessages());
         }
 
-        public static IApplicationController CreateApplicationController()
+        private static IApplicationController CreateApplicationController()
         {
             return new ApplicationController(CreateOrderTaker(), CreateReportGenerator());
         }
 
-        public static IConsoleIO CreateConsoleIO()
+        private static IConsoleIO CreateConsoleIO()
         {
             return new ConsoleIO();
         }
 
-        public static IStandardApplicationMessages CreateStandardApplicationMessages()
+        private static IStandardApplicationMessages CreateStandardApplicationMessages()
         {
             return new StandardApplicationMessages();
         }
 
-        public static IOrderTaker CreateOrderTaker()
+        private static IOrderTaker CreateOrderTaker()
         {
             return new OrderTaker(CreateCustomerInformationCollector(), CreateOrderListGenerator(), CreateOrderNumberTracker());
         }
 
-        public static ICustomerInformationCollector CreateCustomerInformationCollector()
+        private static ICustomerInformationCollector CreateCustomerInformationCollector()
         {
-            return new CustomerInformationCollector(CreateConsoleIO());
+            return new CustomerInformationCollector(_consoleIO);
         }
-        public static IOrderListGenerator CreateOrderListGenerator()
+        private static IOrderListGenerator CreateOrderListGenerator()
         {
-            return new BlockOrderListGenerator(CreateConsoleIO(), CreateShapes(), CreateColours());
+            return new BlockOrderListGenerator(_consoleIO, _shapes, _colours);
         }
 
-        public static List<IShape> CreateShapes()
+        private static List<IShape> CreateShapes()
         {
             return new List<IShape>()
             {
@@ -47,7 +52,7 @@ namespace ToyBlockFactory
                 new Circle()
             };
         }
-        public static List<IColour> CreateColours()
+        private static List<IColour> CreateColours()
         {
             return new List<IColour>()
             {
@@ -57,43 +62,43 @@ namespace ToyBlockFactory
             };
         }
 
-        public static IOrderNumberTracker CreateOrderNumberTracker()
+        private static IOrderNumberTracker CreateOrderNumberTracker()
         {
             return new OrderNumberTracker();
         }
 
-        public static IReportGenerator CreateReportGenerator()
+        private static IReportGenerator CreateReportGenerator()
         {
-            return new ReportsGenerator(CreateReportTypes());
+            return new ReportGenerator(CreateReportTypes());
         }
 
-        public static List<IReport> CreateReportTypes()
+        private static List<IReport> CreateReportTypes()
         {
             return new List<IReport>()
             {
                 new InvoiceReport(
-                    CreateConsoleIO(), 
-                    CreateColours(), 
-                    CreateShapes(), 
-                    CreateStandardReportMessages(), 
+                    _consoleIO, 
+                    _colours, 
+                    _shapes, 
+                    _standardReportMessages, 
                     CreateInvoiceReportTable()),
                 new CuttingListReport(
-                    CreateConsoleIO(), 
-                    CreateStandardReportMessages(), 
+                    _consoleIO, 
+                    _standardReportMessages, 
                     CreateCuttingListReportTable()),
                 new PaintingReport(
-                    CreateConsoleIO(), 
-                    CreateStandardReportMessages(), 
+                    _consoleIO, 
+                    _standardReportMessages, 
                     CreateInvoiceReportTable())
             };
         }
 
-        public static IStandardReportMessages CreateStandardReportMessages()
+        private static IStandardReportMessages CreateStandardReportMessages()
         {
             return new StandardReportMessages();
         }
 
-        public static IReportTable CreateInvoiceReportTable()
+        private static IReportTable CreateInvoiceReportTable()
         {
             return new ReportTable(
                 CreateInvoiceReportColumns(), 
@@ -101,7 +106,7 @@ namespace ToyBlockFactory
                 CreateInvoiceFieldData());
         }
 
-        public static IReportTable CreateCuttingListReportTable()
+        private static IReportTable CreateCuttingListReportTable()
         {
             var columns = new List<string>()
             {
@@ -113,35 +118,32 @@ namespace ToyBlockFactory
                 CreateCuttingListFieldData());
         }
 
-        // TODO: Fix this implementation
-        public static List<string> CreateInvoiceReportColumns()
+        private static List<string> CreateInvoiceReportColumns()
         {
-            var columns = CreateColours();
             var newColumns = new List<string>();
-            foreach(IColour colour in columns)
+            foreach(IColour colour in _colours)
             {
                 newColumns.Add(colour.Name);
             }
             return newColumns;
         }
 
-        public static List<string> CreateRows()
+        private static List<string> CreateRows()
         {
-            var columns = CreateShapes();
             var newColumns = new List<string>();
-            foreach(IShape colour in columns)
+            foreach(IShape shape in _shapes)
             {
-                newColumns.Add(colour.Name);
+                newColumns.Add(shape.Name);
             }
             return newColumns;
         }
 
-        public static IFieldData CreateInvoiceFieldData()
+        private static IFieldData CreateInvoiceFieldData()
         {
             return new InvoiceFieldData();
         }
         
-        public static IFieldData CreateCuttingListFieldData()
+        private static IFieldData CreateCuttingListFieldData()
         {
             return new CuttingListFieldData();
         }

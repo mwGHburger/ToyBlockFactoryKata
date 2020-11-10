@@ -9,8 +9,12 @@ namespace ToyBlockFactory
                 block.Shape.Equals(row)
             ).OrderQuantity;
             
-            var stringifiedQuantity = fieldData.Equals(0) ? "-" : $"{fieldData}";
-            return stringifiedQuantity;
+            var stringifiedFieldData = FormatFieldData(fieldData);
+            return stringifiedFieldData;
+        }
+        private string FormatFieldData(int fieldData)
+        {
+            return fieldData.Equals(0) ? "-" : $"{fieldData}";
         }
     }
 }
