@@ -9,9 +9,9 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void GenerateReport_ShouldDisplayOrderDetailsToConsole()
         {
-            var colours = SetupColours();
-            var shapes = SetupShapes();
-            var blocks = SetupBlocks();            
+            var colours = TestHelper.SetupColours();
+            var shapes = TestHelper.SetupShapes();
+            var blocks = TestHelper.SetupBlocks();            
             
             var mockConsoleIO = new Mock<IConsoleIO>();
             var mockOrder = new Mock<IOrder>();
@@ -51,42 +51,5 @@ namespace ToyBlockFactory.Tests
             "Red color surcharge    1 @ $1 ppi = $1\n"
             ), Times.Exactly(1));
         }
-
-        private List<IColour> SetupColours()
-        {
-            return new List<IColour>()
-            {
-                new Red(),
-                new Blue(),
-                new Yellow()
-            };
-        }
-
-        private List<IShape> SetupShapes()
-        {
-            return new List<IShape>()
-            {
-                new Square(),
-                new Triangle(),
-                new Circle()
-            };
-        }
-
-        private List<IBlockOrderItem> SetupBlocks()
-        {
-            return new List<IBlockOrderItem>()
-            {
-                new BlockOrderItem("Square", "Red", 1),
-                new BlockOrderItem("Triangle", "Red", 0),
-                new BlockOrderItem("Circle", "Red", 0),
-                new BlockOrderItem("Square", "Blue", 0),
-                new BlockOrderItem("Triangle", "Blue", 2),
-                new BlockOrderItem("Circle", "Blue", 1),
-                new BlockOrderItem("Square", "Yellow", 1),
-                new BlockOrderItem("Triangle", "Yellow", 0),
-                new BlockOrderItem("Circle", "Yellow", 2)
-            };
-        }
-
     }
 }

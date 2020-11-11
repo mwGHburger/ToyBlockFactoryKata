@@ -1,28 +1,29 @@
 using System.Collections.Generic;
-using Moq;
-using Xunit;
 
 namespace ToyBlockFactory.Tests
 {
-    public class CuttingListFieldDataTest
+    public static class TestHelper
     {
-        [Theory]
-        [InlineData("Square", "2")]
-        [InlineData("Circle", "3")]
-        public void DetermineTableFieldData_ShouldReturnStringData(string row, string expected)
+        public static List<IColour> SetupColours()
         {
-            var blocks = SetupBlocks();
-            var mockOrder = new Mock<IOrder>();
-            var cuttingListFieldData = new CuttingListFieldData();
-
-            mockOrder.Setup(x => x.Blocks).Returns(blocks);
-
-            var actual = cuttingListFieldData.DetermineTableFieldData(mockOrder.Object, row);
-
-            Assert.Equal(expected, actual);
+            return new List<IColour>()
+            {
+                new Red(),
+                new Blue(),
+                new Yellow()
+            };
         }
 
-        private List<IBlockOrderItem> SetupBlocks()
+        public static List<IShape> SetupShapes()
+        {
+            return new List<IShape>()
+            {
+                new Square(),
+                new Triangle(),
+                new Circle()
+            };
+        }
+        public static List<IBlockOrderItem> SetupBlocks()
         {
             return new List<IBlockOrderItem>()
             {
@@ -38,5 +39,4 @@ namespace ToyBlockFactory.Tests
             };
         }
     }
-    
 }

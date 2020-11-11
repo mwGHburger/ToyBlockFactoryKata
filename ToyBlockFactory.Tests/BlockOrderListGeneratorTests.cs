@@ -6,24 +6,11 @@ namespace ToyBlockFactory.Tests
 {
     public class BlockOrderListGeneratorTest
     {
-        List<IShape> shapes = new List<IShape>()
-            {
-                new Square(),
-                new Triangle(),
-                new Circle()
-            };
-
-        List<IColour> colours = new List<IColour>()
-        {
-            new Red(),
-            new Blue(),
-            new Yellow()
-        };
         [Fact]
         public void GetBlockOrderItemsDetails_ShouldReturnTypeListOfBlockOrderItems()
         {
             var mockConsoleIO = new Mock<IConsoleIO>();
-            var blockListGenerator = new BlockOrderListGenerator(mockConsoleIO.Object, shapes, colours);
+            var blockListGenerator = new BlockOrderListGenerator(mockConsoleIO.Object, TestHelper.SetupShapes(), TestHelper.SetupColours());
             
             var actualBlockOrderItemsList = blockListGenerator.GetBlockOrderItemsDetails();
 
@@ -38,7 +25,7 @@ namespace ToyBlockFactory.Tests
         {
             var mockConsoleIO = new Mock<IConsoleIO>();
             
-            var blockListGenerator = new BlockOrderListGenerator(mockConsoleIO.Object, shapes, colours);
+            var blockListGenerator = new BlockOrderListGenerator(mockConsoleIO.Object, TestHelper.SetupShapes(), TestHelper.SetupColours());
 
             mockConsoleIO.Setup(x => x.GetInput($"Please input the number of {colour} {shape}: ")).Returns(actualQuantity);
             

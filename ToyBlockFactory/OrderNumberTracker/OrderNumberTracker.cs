@@ -6,9 +6,14 @@ namespace ToyBlockFactory
 
         public string GetNewOrderNumber()
         {
-            _currentOrderNumber += 1;
+            IncrementOrderNumber();
             char pad = '0';
             return _currentOrderNumber.ToString().PadLeft(4, pad);
+        }
+
+        private void IncrementOrderNumber()
+        {
+            _currentOrderNumber += 1;
         }
     }
 }

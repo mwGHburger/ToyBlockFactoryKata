@@ -9,7 +9,7 @@ namespace ToyBlockFactory.Tests
         [Fact]
         public void GenerateReport_ShouldGenerateCuttingListReport()
         {
-            var blocks = SetupBlocks();  
+            var blocks = TestHelper.SetupBlocks();  
             var mockOrder = new Mock<IOrder>();
             var mockConsoleIO = new Mock<IConsoleIO>();
             var mockStandardReportMessages = new Mock<IStandardReportMessages>();
@@ -39,22 +39,6 @@ namespace ToyBlockFactory.Tests
             "| Triangle | 2   |\n" +
             "| Circle   | 3   |\n"
             ), Times.Exactly(1));
-        }
-
-        private List<IBlockOrderItem> SetupBlocks()
-        {
-            return new List<IBlockOrderItem>()
-            {
-                new BlockOrderItem("Square", "Red", 1),
-                new BlockOrderItem("Triangle", "Red", 0),
-                new BlockOrderItem("Circle", "Red", 0),
-                new BlockOrderItem("Square", "Blue", 0),
-                new BlockOrderItem("Triangle", "Blue", 2),
-                new BlockOrderItem("Circle", "Blue", 1),
-                new BlockOrderItem("Square", "Yellow", 1),
-                new BlockOrderItem("Triangle", "Yellow", 0),
-                new BlockOrderItem("Circle", "Yellow", 2)
-            };
         }
     }
 }
